@@ -1,0 +1,35 @@
+{
+  "name": "Go",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.Go",
+        "ms-azuretools.vscode-docker",
+        "GitHub.vscode-github-actions",
+        "redhat.vscode-yaml",
+        "esbenp.prettier-vscode",
+        "DavidAnson.vscode-markdownlint"
+      ],
+      "settings": {
+        // gopls & format
+        "go.useLanguageServer": true,
+        "gopls": {
+          "ui.semanticTokens": true,
+          "staticcheck": true
+        },
+        "go.formatTool": "gofumpt",
+        "[go]": {
+          "editor.defaultFormatter": "golang.Go",
+          "editor.formatOnSave": true
+        },
+        // lint (golangci-lint via problems)
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "package",
+        "go.testOnSave": true
+      }
+    }
+  }
+}

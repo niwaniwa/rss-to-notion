@@ -1,6 +1,4 @@
-# ai tool template
+# RSS to Notion
 ## 概要
-cursorやclaudeなどのAIツールのためのプロンプトテンプレート
+- RSSで取得した情報を自動的に対象のnotionテーブルに同期するシステム
 
-## refarence
-- github-pr-summary https://zenn.dev/dely_jp/articles/abe6a40a384985
