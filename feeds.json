@@ -1,0 +1,9 @@
+{
+  "feeds": [
+    {
+      "url": "https://example.com/feed",
+      "name": "example blog",
+      "tags": ["tech", "blog"]
+    }
+  ]
+}

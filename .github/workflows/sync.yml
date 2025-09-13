@@ -1,0 +1,65 @@
+name: RSS to Notion Sync
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# 同一ブランチでの並列実行を防ぐ
+concurrency:
+  group: rss-sync-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    name: Sync RSS to Notion
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Validate configuration
+        run: |
+          python -c "
+          import json
+          with open('feeds.json', 'r') as f:
+              config = json.load(f)
+          print(f'Loaded {len(config.get(\"feeds\", []))} feeds')
+          for feed in config.get('feeds', []):
+              print(f'- {feed.get(\"name\", \"Unknown\")}: {feed.get(\"url\", \"No URL\")}')
+          "
+      
+      - name: Run RSS to Notion sync
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          cd src
+          python main.py
+      
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sync-logs-${{ github.run_id }}
+          path: |
+            src/*.log
+          retention-days: 7
+          if-no-files-found: ignore
