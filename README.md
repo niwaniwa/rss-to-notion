@@ -58,8 +58,7 @@ cp .env.example .env
 
 ### ローカル実行
 ```bash
-cd src
-python main.py
+python ./src/main.py
 ```
 
 ### GitHub Actions設定
