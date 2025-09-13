@@ -1,9 +1,29 @@
 {
   "feeds": [
     {
-      "url": "https://example.com/feed",
-      "name": "example blog",
+      "url": "https://qiita.com/arila/feed",
+      "name": "nirila qiita",
       "tags": ["tech", "blog"]
+    },
+    {
+      "url": "https://www.moguravr.com/feed/",
+      "name": "Mogura VR",
+      "tags": ["tech", "blog", "vr"]
+    },
+    {
+      "url": "https://panora.tokyo/feed",
+      "name": "PANORA",
+      "tags": ["blog", "vr"]
+    },
+    {
+      "url": "https://www.sbbit.jp/rss/HotTopics.rss",
+      "name": "ビジネス+IT HotTopics",
+      "tags": ["business", "it", "news"]
+    },
+    {
+      "url": "https://www.xrtoday.com/feed/",
+      "name": "XR Today",
+      "tags": ["xr"]
     }
   ]
 }
